@@ -15,7 +15,10 @@ fn main() {
             .read_line(&mut guess) //標準入力にguessを渡す（標準入力の内容をguessに入力)
             .expect("Failed to read line"); //read_line()が返すResultがErrの場合クラッシュさせる
 
-        let guess: u32 = guess.trim().parse().expect("Please type a number!");
+        let guess: u32 = match guess.trim().parse() {
+            Ok(num) => num,
+            Err(_) => continue,
+        };
 
         println!("You guessed: {}", guess);
 
