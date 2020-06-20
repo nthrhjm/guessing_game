@@ -15,11 +15,15 @@ fn main() {
             .read_line(&mut guess) //標準入力にguessを渡す（標準入力の内容をguessに入力)
             .expect("Failed to read line"); //read_line()が返すResultがErrの場合クラッシュさせる
 
-        let guess: u32 = match guess.trim().parse() {
+        let guess: i32 = match guess.trim().parse() {
             Ok(num) => num,
             Err(_) => continue,
         };
 
+        if guess < 1 || guess > 100 {
+            println!("The secret number will be between 1 and 100.");
+            continue;
+        }
         println!("You guessed: {}", guess);
 
         match guess.cmp(&secret_number) {
